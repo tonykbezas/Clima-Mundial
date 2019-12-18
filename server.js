@@ -21,21 +21,25 @@ const info = require('./controlador/info');
 // clima.getClima(-0.19,-78.5)
 //     .then(console.log);
 app.get('/', async function(req, res) {
+    let uio = await info.getInfo("Quito");
+    let gua = await info.getInfo("Guayaquil");
         res.render('home', {
             ciu1: "Quito",
             ciu2: "Guayaquil",
-            cli1: await info.getInfo("Quito")['cli'],
-            cli2: await info.getInfo("Guayaquil")
+            cli1: JSON.stringify(uio['cli']),
+            cli2: JSON.stringify(gua['cli'])
         });
 });
 
 app.get('/about',async (req, res) => {
     //res.send('Esta es mi primera web app');
+    let mad = await info.getInfo("Madrid");
+    let par = await info.getInfo("Paris");
     res.render('about',{
         ciu1: "Madrid",
         ciu2: "Paris",
-        cli1: await info.getInfo("Madrid")['cli'],
-        cli2: await info.getInfo("Paris")
+        cli1: JSON.stringify(mad['cli']),
+        cli2: JSON.stringify(par['cli'])
     });
 });
 
